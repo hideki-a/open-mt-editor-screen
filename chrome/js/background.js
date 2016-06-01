@@ -4,6 +4,24 @@
     });
 
     chrome.pageAction.onClicked.addListener(function (tab) {
+        console.log(tab.url);
+        $.ajax({
+            url: "http://mt6.localhost/mt/mt.cgi",
+            method: "get",
+            data: {
+                __mode: "get_file_info",
+                url: encodeURI("/2016/05/mt-archived-entries-plugin.html")
+            }
+        }).done(function (response, status, xhr) {
+            var ct = xhr.getResponseHeader("content-type") || "";
+
+            if (ct.indexOf("html") > -1) {
+                console.log("login require");
+            }
+            if (ct.indexOf("json") > -1) {
+                console.log(response);
+            }
+        });
         chrome.tabs.sendRequest(tab.id, { method: "getText" }, function (response) {
             var text;
             var dataStr;
