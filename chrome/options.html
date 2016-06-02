@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/options.css">
+<script src="js/jquery.min.js"></script>
+<script src="js/handlebars.min.js"></script>
+<script src="js/options.js"></script>
+</head>
+<body>
+<h1>Open Movable Type Editor Screenの設定</h1>
+
+<section>
+<h2>設定一覧</h2>
+<table>
+<thead>
+<tr>
+<th scope="col">サイト名</th>
+<th scope="col">ドメイン</th>
+<th scope="col">MT管理画面パス</th>
+<th scope="col">操作</th>
+</tr>
+</thead>
+<tbody id="settings_body">
+</tbody>
+</table>
+</section>
+
+<section>
+<h2>新規サイト登録</h2>
+<form action="#" method="get" id="new_site">
+<table>
+<tbody>
+<tr>
+<th scope="row"><label for="new_sitename">サイト名</label></th>
+<td><input type="text" name="new_sitename" id="new_sitename" placeholder="サンプルサイト"></td>
+</tr>
+<tr>
+<th scope="row"><label for="new_domain">ドメイン</label></th>
+<td><input type="text" name="new_domain" id="new_domain" placeholder="https://www.example.jp"></td>
+</tr>
+<tr>
+<th scope="row"><label for="new_mt_admin_path">MT管理画面パス</label></th>
+<td><input type="text" name="new_mt_admin_path" id="new_mt_admin_path" placeholder="/cms/mt/mt.cgi"></td>
+</tr>
+</tbody>
+</table>
+
+<div><input type="submit" value="サイトを追加"></div>
+</form>
+</section>
+
+<script id="tmpl_settings_body" type="text/x-handlebars-template">
+{{#each profiles}}
+<tr>
+<th scope="row">{{siteName}}</th>
+<td>{{domain}}</td>
+<td>{{adminPath}}</td>
+<td><button class="js-profile-delete" data-index="{{@index}}">削除</button></td>
+</tr>
+{{/each}}
+</script>
+</body>
+</html>
