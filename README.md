@@ -48,3 +48,8 @@ bless( {
 
 - DataAPIのエンドポイントを追加して、ブログID・記事ID・classを取得する
 - 拡張の設定画面を作成し、ドメインとMTのURLを登録可能にする
+
+## 商標について
+
+Movable Type は Six Apart, Ltd. の商標または登録商標です。
+
