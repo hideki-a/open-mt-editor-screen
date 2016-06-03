@@ -1,6 +1,29 @@
 (function () {
-    chrome.tabs.onUpdated.addListener(function (tabId) {
-        chrome.pageAction.show(tabId);
+    function getProfiles () {
+        var profilesStr = localStorage["OpenMTEditorScreen"];
+        var json;
+
+        if (profilesStr) {
+            json = JSON.parse(profilesStr);
+            return {
+                profiles: json
+            };
+        }
+
+        return {};
+    }
+
+    chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+        var profileData = getProfiles();
+        var url = tab.url;
+
+        profileData.profiles.forEach(function (profile) {
+            var domain = profile.domain.replace(/https?:\/\/([^\/]+)/, "$1");
+
+            if (url.indexOf(domain) > -1) {
+                chrome.pageAction.show(tabId);
+            }
+        });
     });
 
     chrome.pageAction.onClicked.addListener(function (tab) {
