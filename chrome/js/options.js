@@ -26,13 +26,17 @@ function loadProfiles () {
 
 function addProfile (e) {
     var profileData = getProfiles();
-    var newProfile = {
-        siteName: $("#new_sitename").val(),
-        domain: $("#new_domain").val(),
-        adminPath: $("#new_mt_admin_path").val()
-    };
+    var newProfile;
+    var domain;
 
     e.preventDefault();
+
+    domain = $("#new_domain").val().replace(/(https?:\/\/[^\/]+).*/, "$1");
+    newProfile = {
+        siteName: $("#new_sitename").val(),
+        domain: domain,
+        adminPath: $("#new_mt_admin_path").val()
+    };
 
     if (!profileData) {
         profileData = {
