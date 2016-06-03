@@ -1,5 +1,5 @@
 function getProfiles () {
-    var profilesStr = localStorage["OpenMTEditorScreen"];
+    var profilesStr = localStorage.OpenMTEditorScreen;
     var json;
 
     if (profilesStr) {
@@ -42,7 +42,7 @@ function addProfile (e) {
         profileData.profiles.push(newProfile);
     }
 
-    localStorage["OpenMTEditorScreen"] = JSON.stringify(profileData.profiles);
+    localStorage.OpenMTEditorScreen = JSON.stringify(profileData.profiles);
 
     document.location.reload();
 }
@@ -52,7 +52,7 @@ function deleteProfile (index) {
 
     if (profileData.profiles.length > index) {
         profileData.profiles.splice(index, 1);
-        localStorage["OpenMTEditorScreen"] = JSON.stringify(profileData.profiles);
+        localStorage.OpenMTEditorScreen = JSON.stringify(profileData.profiles);
     }
 
     document.location.reload();
