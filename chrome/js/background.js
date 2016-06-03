@@ -1,6 +1,8 @@
 (function () {
+    var matchProfile;
+
     function getProfiles () {
-        var profilesStr = localStorage["OpenMTEditorScreen"];
+        var profilesStr = localStorage.OpenMTEditorScreen;
         var json;
 
         if (profilesStr) {
@@ -21,42 +23,42 @@
             var domain = profile.domain.replace(/https?:\/\/([^\/]+)/, "$1");
 
             if (url.indexOf(domain) > -1) {
+                matchProfile = profile;
                 chrome.pageAction.show(tabId);
             }
         });
     });
 
     chrome.pageAction.onClicked.addListener(function (tab) {
-        console.log(tab.url);
+        var url = tab.url;
+        var filePath = url.replace(/https?:\/\/[^\/]+(.*)/, "$1");
+        var adminURL = matchProfile.domain + matchProfile.adminPath;
+
         $.ajax({
-            url: "http://mt6.localhost/mt/mt.cgi",
+            url: adminURL,
             method: "get",
             data: {
                 __mode: "get_file_info",
-                url: encodeURI("/2016/05/mt-archived-entries-plugin.html")
+                url: encodeURI(filePath)
             }
         }).done(function (response, status, xhr) {
-            var ct = xhr.getResponseHeader("content-type") || "";
+            var contentType = xhr.getResponseHeader("content-type") || "";
+            var data = response.result;
+            var openURL;
 
-            if (ct.indexOf("html") > -1) {
-                console.log("login require");
+            if (contentType.indexOf("html") > -1) {
+                alert("Movable Type管理画面にログインしてください。");
             }
-            if (ct.indexOf("json") > -1) {
-                console.log(response);
-            }
-        });
-        chrome.tabs.sendRequest(tab.id, { method: "getText" }, function (response) {
-            var text;
-            var dataStr;
-            var data;
-            var newURL;
 
-            if (response.method=="getText") {
-                text = response.data;
-                dataStr = text.replace(/(.|\n)*<\!\-\- class\: (.*?), bid\: (\d+), eid\: (\d+) \-\->(.|\n)*/,"$2,$3,$4");
-                data = dataStr.split(",");
-                newURL = "http://mt6.localhost/mt/mt.cgi?__mode=view&blog_id=" + data[1] + "&id=" + data[2] + "&_type=" + data[0];
-                chrome.tabs.create({ url: newURL });
+            if (contentType.indexOf("json") > -1) {
+                if (!response.error) {
+                    openURL = adminURL + "?__mode=view&blog_id=" +
+                                data.blog_id + "&id=" + data.id +
+                                "&_type=" + data.class;
+                    chrome.tabs.create({ url: openURL });
+                } else {
+                    alert("該当する記事・ウェブページが見つかりませんでした。");
+                }
             }
         });
     });
