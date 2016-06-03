@@ -21,15 +21,6 @@
         },
         "default_title": "MT編集画面を開く"
     },
-    "content_scripts": [
-        {
-            "matches": [
-                "http://*/*",
-                "https://*/*"
-            ],
-            "js": ["js/content_script.js"]
-        }
-    ],
     "options_page": "options.html",
     "permissions": [
         "tabs",
