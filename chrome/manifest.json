@@ -3,6 +3,11 @@
     "name": "Open Movable Type Editor Screen",
     "description": "Movable Typeの編集画面を開きます。",
     "version": "1.0",
+    "icons": {
+        "16": "icon/icon16.png",
+        "48": "icon/icon48.png",
+        "128": "icon/icon128.png"
+    },
     "background": {
         "scripts": [
             "js/jquery.min.js",
@@ -10,7 +15,10 @@
         ]
     },
     "page_action": {
-        "default_icon": "icon/mt.png",
+        "default_icon": {
+            "19": "icon/icon19.png",
+            "38": "icon/icon38.png"
+        },
         "default_title": "MT編集画面を開く"
     },
     "content_scripts": [
