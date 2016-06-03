@@ -32,7 +32,13 @@
     chrome.pageAction.onClicked.addListener(function (tab) {
         var url = tab.url;
         var filePath = url.replace(/https?:\/\/[^\/]+(.*)/, "$1");
-        var adminURL = matchProfile.domain + matchProfile.adminPath;
+        var adminURL;
+
+        if (matchProfile.adminDomain) {
+            adminURL = matchProfile.adminDomain + matchProfile.adminPath;
+        } else {
+            adminURL = matchProfile.domain + matchProfile.adminPath;
+        }
 
         $.ajax({
             url: adminURL,

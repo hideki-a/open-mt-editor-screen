@@ -17,6 +17,7 @@
 <tr>
 <th scope="col">サイト名</th>
 <th scope="col">ドメイン</th>
+<th scope="col">MT管理画面ドメイン</th>
 <th scope="col">MT管理画面パス</th>
 <th scope="col">操作</th>
 </tr>
@@ -28,6 +29,7 @@
 
 <section>
 <h2>新規サイト登録</h2>
+<p>MT管理画面ドメインは、フロントのドメインと異なる場合のみ入力が必要です。</p>
 <form action="#" method="get" id="new_site">
 <table>
 <tbody>
@@ -38,6 +40,10 @@
 <tr>
 <th scope="row"><label for="new_domain">ドメイン</label></th>
 <td><input type="text" name="new_domain" id="new_domain" placeholder="https://www.example.jp"></td>
+</tr>
+<tr>
+<th scope="row"><label for="new_admin_domain">MT管理画面ドメイン</label></th>
+<td><input type="text" name="new_admin_domain" id="new_admin_domain" placeholder="https://admin.example.jp"></td>
 </tr>
 <tr>
 <th scope="row"><label for="new_mt_admin_path">MT管理画面パス</label></th>
@@ -57,6 +63,7 @@
 <tr>
 <th scope="row">{{siteName}}</th>
 <td>{{domain}}</td>
+<td>{{adminDomain}}</td>
 <td>{{adminPath}}</td>
 <td><button class="js-profile-delete" data-index="{{@index}}">削除</button></td>
 </tr>

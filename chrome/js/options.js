@@ -28,13 +28,16 @@ function addProfile (e) {
     var profileData = getProfiles();
     var newProfile;
     var domain;
+    var adminDomain;
 
     e.preventDefault();
 
     domain = $("#new_domain").val().replace(/(https?:\/\/[^\/]+).*/, "$1");
+    adminDomain = $("#new_admin_domain").val().replace(/(https?:\/\/[^\/]+).*/, "$1");
     newProfile = {
         siteName: $("#new_sitename").val(),
         domain: domain,
+        adminDomain: adminDomain,
         adminPath: $("#new_mt_admin_path").val()
     };
 
