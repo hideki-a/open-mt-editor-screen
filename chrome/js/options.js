@@ -38,12 +38,12 @@ function addProfile (e) {
         adminPath: $("#new_mt_admin_path").val()
     };
 
-    if (!profileData) {
+    if (profileData.profiles && profileData.profiles.length) {
+        profileData.profiles.push(newProfile);
+    } else {
         profileData = {
             profiles: [newProfile]
         };
-    } else {
-        profileData.profiles.push(newProfile);
     }
 
     localStorage.OpenMTEditorScreen = JSON.stringify(profileData.profiles);
