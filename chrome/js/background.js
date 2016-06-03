@@ -22,7 +22,7 @@
         profileData.profiles.forEach(function (profile) {
             var domain = profile.domain.replace(/https?:\/\/([^\/]+)/, "$1");
 
-            if (url.indexOf(domain) > -1) {
+            if (url.indexOf(domain) > -1 && url.indexOf(profile.adminPath) === -1) {
                 matchProfile = profile;
                 chrome.pageAction.show(tabId);
             }
