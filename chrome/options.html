@@ -19,6 +19,7 @@
 <th scope="col">ドメイン</th>
 <th scope="col">MT管理画面ドメイン</th>
 <th scope="col">MT管理画面パス</th>
+<th scope="col">ディレクトリインデックス</th>
 <th scope="col">操作</th>
 </tr>
 </thead>
@@ -49,6 +50,10 @@
 <th scope="row"><label for="new_mt_admin_path">MT管理画面パス</label></th>
 <td><input type="text" name="new_mt_admin_path" id="new_mt_admin_path" placeholder="/cms/mt/mt.cgi"></td>
 </tr>
+<tr>
+<th scope="row"><label for="dirindex_filename">ディレクトリインデックス</label></th>
+<td><input type="text" name="dirindex_filename" id="dirindex_filename" placeholder="index.html"></td>
+</tr>
 </tbody>
 </table>
 
@@ -65,6 +70,7 @@
 <td>{{domain}}</td>
 <td>{{adminDomain}}</td>
 <td>{{adminPath}}</td>
+<td>{{dirIndex}}</td>
 <td><button class="js-profile-delete" data-index="{{@index}}">削除</button></td>
 </tr>
 {{/each}}

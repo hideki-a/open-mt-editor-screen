@@ -38,7 +38,8 @@ function addProfile (e) {
         siteName: $("#new_sitename").val(),
         domain: domain,
         adminDomain: adminDomain,
-        adminPath: $("#new_mt_admin_path").val()
+        adminPath: $("#new_mt_admin_path").val(),
+        dirIndex: $("#dirindex_filename").val()
     };
 
     if (profileData.profiles && profileData.profiles.length) {

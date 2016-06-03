@@ -40,6 +40,14 @@
             adminURL = matchProfile.domain + matchProfile.adminPath;
         }
 
+        if (/.*\/$/.test(filePath)) {
+            if (matchProfile.dirIndex) {
+                filePath = filePath + matchProfile.dirIndex;
+            } else {
+                filePath = filePath + "index.html";
+            }
+        }
+
         $.ajax({
             url: adminURL,
             method: "get",
