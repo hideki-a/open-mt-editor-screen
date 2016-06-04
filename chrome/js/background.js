@@ -60,7 +60,9 @@
             var openURL;
 
             if (contentType.indexOf("html") > -1) {
-                alert("Movable Type管理画面にログインしてください。");
+                if (confirm("Movable Type管理画面へのログインが必要です。ログイン画面を開きますか？")) {
+                    chrome.tabs.create({ url: adminURL });
+                }
             }
 
             if (contentType.indexOf("json") > -1) {
