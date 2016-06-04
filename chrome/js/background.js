@@ -1,30 +1,27 @@
 (function () {
-    var matchProfile;
+    chrome.webNavigation.onCompleted.addListener(function (details) {
+        var getProfiles = function () {
+            var profilesStr = localStorage.OpenMTEditorScreen;
+            var json;
 
-    function getProfiles () {
-        var profilesStr = localStorage.OpenMTEditorScreen;
-        var json;
+            if (profilesStr) {
+                json = JSON.parse(profilesStr);
+                return {
+                    profiles: json
+                };
+            }
 
-        if (profilesStr) {
-            json = JSON.parse(profilesStr);
-            return {
-                profiles: json
-            };
-        }
-
-        return {};
-    }
-
-    chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+            return {};
+        };
         var profileData = getProfiles();
-        var url = tab.url;
+        var url = details.url;
 
         profileData.profiles.forEach(function (profile) {
             var domain = profile.domain.replace(/https?:\/\/([^\/]+)/, "$1");
 
             if (url.indexOf(domain) > -1 && url.indexOf(profile.adminPath) === -1) {
-                matchProfile = profile;
-                chrome.pageAction.show(tabId);
+                localStorage.OpenMTEditorScreenCurrent = JSON.stringify(profile);
+                chrome.pageAction.show(details.tabId);
             }
         });
     });
@@ -33,6 +30,8 @@
         var url = tab.url;
         var filePath = url.replace(/https?:\/\/[^\/]+(.*)/, "$1");
         var adminURL;
+        var profileStr = localStorage.OpenMTEditorScreenCurrent;
+        var matchProfile = JSON.parse(profileStr);
 
         if (matchProfile.adminDomain) {
             adminURL = matchProfile.adminDomain + matchProfile.adminPath;

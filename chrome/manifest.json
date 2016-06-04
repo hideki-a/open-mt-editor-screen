@@ -12,7 +12,8 @@
         "scripts": [
             "js/jquery.min.js",
             "js/background.js"
-        ]
+        ],
+        "persistent": false
     },
     "page_action": {
         "default_icon": {
@@ -23,7 +24,7 @@
     },
     "options_page": "options.html",
     "permissions": [
-        "tabs",
+        "webNavigation",
         "storage",
         "https://*/*",
         "http://*/*"
