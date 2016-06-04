@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Open Movable Type Editor Screen",
     "description": "ワンクリックでタブに開いているページのMovable Type編集画面を開きます。",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "icons": {
         "16": "icon/icon16.png",
         "48": "icon/icon48.png",
